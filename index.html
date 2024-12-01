@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success</title>
+    <script>
+        // Function to get URL parameters
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                reference: params.get('reference'),
+                status: params.get('status')
+            };
+        }
+
+        // Display the transaction reference
+        document.addEventListener("DOMContentLoaded", () => {
+            const { reference, status } = getQueryParams();
+            
+            if (status === "success" && reference) {
+                document.getElementById("transaction-reference").textContent = reference;
+            } else {
+                document.getElementById("transaction-reference").textContent = "Transaction failed or reference not found.";
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Payment Status</h1>
+    <p>Your transaction reference is: <strong id="transaction-reference">Loading...</strong></p>
+</body>
+</html>
